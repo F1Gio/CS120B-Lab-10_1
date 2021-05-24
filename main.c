@@ -64,6 +64,16 @@ enum toggleLED0_States {toggleLED0_wait, toggleLED0_blink};
 enum toggleLED1_States {toggleLED1_wait, toggleLED1_blink};
 enum display_States {display_display};
 
+unsigned char SetBit(unsigned char pin, unsigned char number, unsigned char bin_value) 
+{
+	return (bin_value ? pin | (0x01 << number) : pin & ~(0x01 << number));
+}
+
+unsigned char GetBit(unsigned char port, unsigned char number) 
+{
+	return ( port & (0x01 << number) );
+}
+
 unsigned char GetKeypadKey() {
 	PORTC = 0xEF;
 	asm("nop");
